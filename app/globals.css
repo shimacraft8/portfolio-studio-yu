@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --accent: #3b9eff;
+  --accent: #c47a4a;
 }
 
 * {
@@ -16,8 +16,8 @@ html {
 }
 
 body {
-  background-color: #0a0f1e;
-  color: #f0f4ff;
+  background-color: #faf4ea;
+  color: #33271d;
   font-family: var(--font-noto), sans-serif;
   overflow-x: hidden;
 }
@@ -41,51 +41,15 @@ h1, h2, h3, .font-display {
   letter-spacing: 0.3em;
 }
 
-/* カスタムカーソル（PCのみ） */
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  border-radius: 9999px;
-  mix-blend-mode: difference;
-  will-change: transform;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: #fff;
-}
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: width 0.2s, height 0.2s, background 0.2s;
-}
-.cursor-ring.is-hover {
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-@media (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
-    display: none !important;
-  }
-}
-
 /* スクロールバー */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0f1e;
+  background: #f3e9d8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1c2742;
+  background: #d8c4a6;
   border-radius: 8px;
 }
 
@@ -98,10 +62,6 @@ h1, h2, h3, .font-display {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-  .cursor-dot,
-  .cursor-ring {
-    display: none !important;
   }
 }
 

@@ -53,7 +53,7 @@ export function Stats() {
       {stats.map((s) => (
         <div
           key={s.label}
-          className="rounded-2xl border border-white/10 bg-card2 px-6 py-10 text-center"
+          className="rounded-2xl border border-line bg-card2 px-6 py-10 text-center"
         >
           <div className="font-display text-5xl font-extrabold text-accent">
             <Counter

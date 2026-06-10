@@ -23,7 +23,7 @@ export function VoiceCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative min-h-[200px] rounded-2xl border border-white/10 bg-card2 p-8 sm:p-10">
+      <div className="relative min-h-[200px] rounded-2xl border border-line bg-card2 p-8 sm:p-10">
         <AnimatePresence mode="wait">
           <motion.blockquote
             key={i}
@@ -47,7 +47,7 @@ export function VoiceCarousel() {
             aria-label={`お客様の声 ${idx + 1} を表示`}
             onClick={() => setI(idx)}
             className={`h-2.5 rounded-full transition-all ${
-              idx === i ? "w-7 bg-accent" : "w-2.5 bg-white/25"
+              idx === i ? "w-7 bg-accent" : "w-2.5 bg-text/20"
             }`}
           />
         ))}

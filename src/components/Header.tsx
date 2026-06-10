@@ -27,12 +27,17 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-bg/70 backdrop-blur-xl border-b border-white/10"
+          ? "bg-bg/70 backdrop-blur-xl border-b border-line"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#hero" className="font-display text-lg font-extrabold tracking-wide">
+        <a
+          href="#hero"
+          className={`font-display text-lg font-extrabold tracking-wide transition-colors ${
+            scrolled ? "text-text" : "text-[#fdf6ea]"
+          }`}
+        >
           {site.name}
         </a>
 
@@ -41,14 +46,16 @@ export function Header() {
             <a
               key={n.href}
               href={n.href}
-              className="font-display text-sm text-text/80 transition-colors hover:text-accent"
+              className={`font-display text-sm transition-colors hover:text-accent ${
+                scrolled ? "text-text/80" : "text-[#fdf6ea]/90"
+              }`}
             >
               {n.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="rounded-full bg-accent px-4 py-2 text-sm font-bold text-bg transition-transform hover:-translate-y-0.5"
+            className="rounded-full bg-accent px-4 py-2 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
           >
             ご予約・お問い合わせ
           </a>
@@ -61,15 +68,15 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           <div className="space-y-1.5">
-            <span className="block h-0.5 w-6 bg-text" />
-            <span className="block h-0.5 w-6 bg-text" />
-            <span className="block h-0.5 w-6 bg-text" />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
           </div>
         </button>
       </div>
 
       {open && (
-        <nav className="border-t border-white/10 bg-bg/95 px-5 py-4 backdrop-blur-xl md:hidden">
+        <nav className="border-t border-line bg-bg/95 px-5 py-4 backdrop-blur-xl md:hidden">
           <ul className="flex flex-col gap-4">
             {nav.map((n) => (
               <li key={n.href}>
