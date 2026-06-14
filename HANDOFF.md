@@ -11,12 +11,16 @@
 
 | 項目 | 内容 |
 |------|------|
-| 本番URL | https://portfolio-studio-yu.vercel.app |
+| 本番URL | https://portfolio-studio-yu-pied.vercel.app |
 | GitHub | https://github.com/shimacraft8/portfolio-studio-yu |
 | ローカル | `/Users/hiroshikento/Documents/portfolio-studio-yu`（SHIMA CRAFT の隣・別リポジトリ） |
 | GitHubアカウント | shimacraft8 |
-| Vercel scope | kizuna-guide-service-s-projects（ログイン名: kizunaguideservice-1112） |
+| Vercel scope | **shimacraft8-6355s-projects**（他案件 shima-craft / haishin-calendar と同じ集約アカウント） |
 
+※2026-06-11 に Vercel を旧アカウント kizuna-guide-service-s-projects から
+shimacraft8-6355s-projects へ移行。`portfolio-studio-yu.vercel.app`（無印）は
+旧アカウントが保持しているため、新アカウントの正規URLは `-pied` 付き。
+※新アカウントでは GitHub 連携済み（main へ push すると自動デプロイされる）。
 ※店名・独自ドメインは確定後に接続予定。今回は vercel.app のままでOK。
 
 ---
@@ -111,7 +115,7 @@ Hero → Concept（特徴3つ）→ Stats（実績カウントアップ）→ Tr
 
 | 変数 | 用途 | 現状 |
 |------|------|------|
-| NEXT_PUBLIC_SITE_URL | 本番URL（OGP/sitemap/構造化データ） | production登録済み |
+| NEXT_PUBLIC_SITE_URL | 本番URL（OGP/sitemap/構造化データ） | production登録済み（https://portfolio-studio-yu-pied.vercel.app） |
 | NEXT_PUBLIC_GA_ID | GA4測定ID | 未設定（設定すると自動で計測開始） |
 
 ---
@@ -127,8 +131,10 @@ npm run dev -- -p 3210      # http://localhost:3210
 npm run build
 
 # デプロイ（本番）
+# 方法A（推奨）: GitHub連携済みなので push すれば自動デプロイ
 git add -A && git commit -m "..." && git push origin main
-vercel --prod --yes --scope kizuna-guide-service-s-projects
+# 方法B: CLIで手動デプロイ
+vercel --prod --yes --scope shimacraft8-6355s-projects
 ```
 
 ---
@@ -145,10 +151,10 @@ vercel --prod --yes --scope kizuna-guide-service-s-projects
 
 ## 10. 未対応・申し送り事項
 
-- **Vercel と GitHub の自動連携が未接続**（「GitHubにLogin Connectionの追加が必要」エラー）。
-  現状は `vercel --prod` のCLI手動デプロイ運用。push連動したい場合は
-  Vercelダッシュボード → Project Settings → Git から手動で連携許可が必要。
-- 独自ドメインは店名決定後に接続予定（現状 vercel.app のまま）。
+- Vercel は shimacraft8-6355s-projects アカウントに移行済み・**GitHub連携済み**
+  （main push で自動デプロイ）。旧 kizuna アカウント側の旧デプロイ（無印URL）は
+  不要であれば後日削除してよい。
+- 独自ドメインは店名決定後に接続予定（現状 `-pied` 付き vercel.app のまま）。
 - アクセスの地図は現状なし（住所確定後に iframe 差し替え予定）。
 - trainer-smile.jpg は配置済みだが未使用（必要なら Trainer セクション等で活用可）。
 
