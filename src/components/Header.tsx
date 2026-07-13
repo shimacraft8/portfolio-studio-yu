@@ -60,9 +60,7 @@ export function Header() {
           ))}
           <a
             href="#contact"
-            className={`rounded-full px-4 py-2 text-sm font-bold transition-all hover:-translate-y-0.5 ${
-              scrolled ? "bg-accent text-white" : "bg-white text-text"
-            }`}
+            className="rounded-full bg-gold px-4 py-2 text-sm font-bold text-text transition-all hover:-translate-y-0.5"
           >
             ご予約・お問い合わせ
           </a>

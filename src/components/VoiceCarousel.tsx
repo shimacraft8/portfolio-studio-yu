@@ -26,7 +26,7 @@ export function VoiceCarousel() {
       <div className="relative min-h-[200px] rounded-2xl border border-line bg-card p-8 pt-10 shadow-sm sm:p-10 sm:pt-12">
         <span
           aria-hidden
-          className="pointer-events-none absolute left-6 top-1 select-none font-display text-7xl font-extrabold leading-none text-text/10"
+          className="pointer-events-none absolute left-6 top-1 select-none font-display text-7xl font-extrabold leading-none text-gold/50"
         >
           “
         </span>
@@ -53,7 +53,7 @@ export function VoiceCarousel() {
             aria-label={`お客様の声 ${idx + 1} を表示`}
             onClick={() => setI(idx)}
             className={`h-2.5 rounded-full transition-all ${
-              idx === i ? "w-7 bg-accent" : "w-2.5 bg-text/20"
+              idx === i ? "w-7 bg-gold" : "w-2.5 bg-text/20"
             }`}
           />
         ))}

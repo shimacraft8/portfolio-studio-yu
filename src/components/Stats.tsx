@@ -53,7 +53,7 @@ export function Stats() {
       <div className="grid grid-cols-1 gap-10 divide-y divide-white/10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-y-0">
         {stats.map((s) => (
           <div key={s.label} className="pt-10 text-center first:pt-0 sm:pt-0">
-            <div className="font-display text-6xl font-extrabold text-white">
+            <div className="font-display text-6xl font-extrabold text-gold">
               <Counter
                 value={s.value}
                 suffix={s.suffix}

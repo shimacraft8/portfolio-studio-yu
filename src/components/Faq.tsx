@@ -25,7 +25,7 @@ export function Faq() {
                 {f.q}
               </span>
               <span
-                className={`shrink-0 text-accent transition-transform duration-300 ${
+                className={`shrink-0 font-bold text-gold-deep transition-transform duration-300 ${
                   isOpen ? "rotate-45" : ""
                 }`}
               >

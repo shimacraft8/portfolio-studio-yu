@@ -15,6 +15,8 @@ const config: Config = {
         card: "#ffffff",
         card2: "#eceef0", // やや濃いグレー
         line: "#e0e3e6", // 罫線
+        gold: "#f0b429", // シグナルカラー（CTA・おすすめ・キャンペーン）
+        "gold-deep": "#c88a00", // ゴールド濃色（白背景上の数字・テキスト用）
       },
       fontFamily: {
         outfit: ["var(--font-outfit)", "sans-serif"],

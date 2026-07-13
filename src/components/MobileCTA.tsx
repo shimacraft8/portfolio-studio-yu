@@ -16,7 +16,7 @@ export function MobileCTA() {
           href={site.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-[1.4] rounded-full bg-accent py-3 text-center text-sm font-bold text-white"
+          className="flex-[1.4] rounded-full bg-gold py-3 text-center text-sm font-bold text-text"
         >
           Instagramで予約
         </a>

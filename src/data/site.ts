@@ -110,7 +110,24 @@ export const campaign = {
 
 // --- 料金（2026-07 戸田さん指定の正式料金）-------------------------
 // per = 1回あたり / total = 合計・月額
-export const priceGroups = [
+// recommended: おすすめバッジ（週1回の習慣化が最も続けやすく、
+// 同回数の回数券より1回あたり750円割安なため月4回コースを推奨）
+type Plan = {
+  name: string;
+  per: string;
+  total: string;
+  recommended?: boolean;
+  reason?: string;
+};
+type PriceGroup = {
+  name: string;
+  en: string;
+  note: string;
+  for: string[];
+  totalLabel: string;
+  plans: Plan[];
+};
+export const priceGroups: PriceGroup[] = [
   {
     name: "回数券",
     en: "TICKET",
@@ -131,7 +148,13 @@ export const priceGroups = [
     for: ["習慣にして続けたい方", "定期的にしっかり取り組みたい方"],
     totalLabel: "月額",
     plans: [
-      { name: "月4回コース", per: "5,500", total: "22,000" },
+      {
+        name: "月4回コース",
+        per: "5,500",
+        total: "22,000",
+        recommended: true,
+        reason: "週1回の習慣づくりにちょうど良いペース",
+      },
       { name: "月8回コース", per: "5,000", total: "40,000" },
     ],
   },

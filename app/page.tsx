@@ -58,11 +58,11 @@ function SectionHead({
 /** チェックアイコン */
 function Check() {
   return (
-    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] bg-accent">
+    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] bg-gold">
       <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" aria-hidden>
         <path
           d="M20 6L9 17l-5-5"
-          stroke="#fff"
+          stroke="#17181a"
           strokeWidth="3.5"
           fill="none"
           strokeLinecap="round"
@@ -119,7 +119,7 @@ export default function Home() {
               </p>
             </Reveal>
             <Reveal delay={0.25}>
-              <span className="mt-6 inline-block rounded-full border border-white/30 bg-white/10 px-5 py-1.5 text-xs font-bold tracking-wide backdrop-blur-sm">
+              <span className="mt-6 inline-block rounded-full border border-gold/60 bg-gold/15 px-5 py-1.5 text-xs font-bold tracking-wide text-gold backdrop-blur-sm">
                 入会金 {campaign.before} → {campaign.after} キャンペーン中
               </span>
             </Reveal>
@@ -127,7 +127,7 @@ export default function Home() {
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="#contact"
-                  className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-bold text-text shadow-lg shadow-black/30 transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="w-full rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-text shadow-lg shadow-black/30 transition-transform hover:-translate-y-0.5 sm:w-auto"
                 >
                   体験・ご予約はこちら
                 </a>
@@ -164,7 +164,7 @@ export default function Home() {
             {concepts.map((c, i) => (
               <Reveal key={c.no} delay={i * 0.1}>
                 <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.3)]">
-                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-300 group-hover:scale-x-100" />
                   <span className="font-display text-4xl font-extrabold text-text/10 transition-colors duration-300 group-hover:text-text/25">
                     {c.no}
                   </span>
@@ -230,7 +230,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-6 space-y-4 border-l-2 border-accent/80 pl-5">
+              <div className="mt-6 space-y-4 border-l-2 border-gold pl-5">
                 {trainer.message.map((m, i) => (
                   <p key={i} className="text-sm leading-relaxed text-text/75">
                     {m}
@@ -287,7 +287,7 @@ export default function Home() {
                   <p className="text-sm text-text/45 line-through">
                     {campaign.before}
                   </p>
-                  <p className="mt-1 font-display text-6xl font-extrabold leading-none">
+                  <p className="mt-1 font-display text-6xl font-extrabold leading-none text-gold-deep">
                     0<span className="ml-1 text-2xl">円</span>
                   </p>
                   <p className="mt-5 max-w-xs text-xs leading-relaxed text-text/60">
@@ -308,7 +308,11 @@ export default function Home() {
                       className="flex items-baseline justify-between gap-4"
                     >
                       <span className="text-sm font-bold">{r.label}</span>
-                      <span className="font-display text-3xl font-extrabold">
+                      <span
+                        className={`font-display text-3xl font-extrabold ${
+                          r.value === "無料" ? "text-gold-deep" : ""
+                        }`}
+                      >
                         {r.value}
                       </span>
                     </div>
@@ -332,7 +336,7 @@ export default function Home() {
                         {g.en}
                       </p>
                       <div className="mt-1.5 flex items-center gap-3">
-                        <span className="h-6 w-1 rounded-full bg-accent" />
+                        <span className="h-6 w-1 rounded-full bg-gold" />
                         <h3 className="font-display text-xl font-extrabold sm:text-2xl">
                           {g.name}
                         </h3>
@@ -364,26 +368,45 @@ export default function Home() {
                     }`}
                   >
                     {g.plans.map((p) => (
-                      <div
-                        key={p.name}
-                        className="overflow-hidden rounded-xl border border-line bg-card text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.35)]"
-                      >
-                        <div className="bg-accent py-2.5 font-display text-sm font-bold text-white">
-                          {p.name}
-                        </div>
-                        <div className="px-3 py-6">
-                          <p className="text-[11px] tracking-wider text-text/50">
-                            1回あたり
-                          </p>
-                          <p className="mt-1 font-display text-3xl font-extrabold">
-                            {p.per}
-                            <span className="ml-0.5 text-sm font-bold text-text/60">
-                              円
-                            </span>
-                          </p>
-                          <p className="mt-3 text-xs text-text/55">
-                            {g.totalLabel} {p.total}円
-                          </p>
+                      <div key={p.name} className="relative">
+                        {p.recommended && (
+                          <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-4 py-1 text-xs font-bold text-text shadow-md">
+                            おすすめ
+                          </span>
+                        )}
+                        <div
+                          className={`h-full overflow-hidden rounded-xl bg-card text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.35)] ${
+                            p.recommended
+                              ? "border-2 border-gold shadow-[0_16px_40px_-16px_rgba(240,180,41,0.45)]"
+                              : "border border-line"
+                          }`}
+                        >
+                          <div className="bg-accent py-2.5 font-display text-sm font-bold text-white">
+                            {p.name}
+                          </div>
+                          <div className="px-3 py-6">
+                            <p className="text-[11px] tracking-wider text-text/50">
+                              1回あたり
+                            </p>
+                            <p
+                              className={`mt-1 font-display text-3xl font-extrabold ${
+                                p.recommended ? "text-gold-deep" : ""
+                              }`}
+                            >
+                              {p.per}
+                              <span className="ml-0.5 text-sm font-bold text-text/60">
+                                円
+                              </span>
+                            </p>
+                            <p className="mt-3 text-xs text-text/55">
+                              {g.totalLabel} {p.total}円
+                            </p>
+                            {p.reason && (
+                              <p className="mt-2 text-[11px] font-bold leading-snug text-gold-deep">
+                                {p.reason}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -472,7 +495,7 @@ export default function Home() {
                   href={site.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-bold text-text transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="w-full rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-text transition-transform hover:-translate-y-0.5 sm:w-auto"
                 >
                   Instagram DM で予約する
                 </a>
