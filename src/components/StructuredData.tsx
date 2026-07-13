@@ -26,7 +26,7 @@ export function StructuredData() {
       g.plans.map((p) => ({
         "@type": "Offer",
         name: `${g.name} ${p.name}`,
-        price: p.price.replace(/,/g, ""),
+        price: p.total.replace(/,/g, ""),
         priceCurrency: "JPY",
       }))
     ),

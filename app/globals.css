@@ -65,6 +65,12 @@ h1, h2, h3, .font-display {
   }
 }
 
+/* テキスト選択 */
+::selection {
+  background: #17181a;
+  color: #fff;
+}
+
 /* フォーカス可視化 */
 :focus-visible {
   outline: 2px solid var(--accent);

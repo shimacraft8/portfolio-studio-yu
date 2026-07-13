@@ -14,7 +14,7 @@ export function Faq() {
         return (
           <div
             key={i}
-            className="overflow-hidden rounded-xl border border-line bg-card2"
+            className="overflow-hidden rounded-xl border border-line bg-card shadow-sm"
           >
             <button
               className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"

@@ -23,7 +23,13 @@ export function VoiceCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative min-h-[200px] rounded-2xl border border-line bg-card2 p-8 sm:p-10">
+      <div className="relative min-h-[200px] rounded-2xl border border-line bg-card p-8 pt-10 shadow-sm sm:p-10 sm:pt-12">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-6 top-1 select-none font-display text-7xl font-extrabold leading-none text-text/10"
+        >
+          “
+        </span>
         <AnimatePresence mode="wait">
           <motion.blockquote
             key={i}

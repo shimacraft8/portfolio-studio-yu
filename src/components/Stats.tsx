@@ -46,27 +46,28 @@ function Counter({
 
 export function Stats() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <div ref={ref} className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-      {stats.map((s) => (
-        <div
-          key={s.label}
-          className="rounded-2xl border border-line bg-card2 px-6 py-10 text-center"
-        >
-          <div className="font-display text-5xl font-extrabold text-accent">
-            <Counter
-              value={s.value}
-              suffix={s.suffix}
-              decimals={(s as { decimals?: number }).decimals ?? 0}
-              active={inView}
-            />
+    <div ref={ref}>
+      <div className="grid grid-cols-1 gap-10 divide-y divide-white/10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-y-0">
+        {stats.map((s) => (
+          <div key={s.label} className="pt-10 text-center first:pt-0 sm:pt-0">
+            <div className="font-display text-6xl font-extrabold text-white">
+              <Counter
+                value={s.value}
+                suffix={s.suffix}
+                decimals={(s as { decimals?: number }).decimals ?? 0}
+                active={inView}
+              />
+            </div>
+            <div className="mt-3 text-xs tracking-[0.25em] text-white/55">
+              {s.label}
+            </div>
           </div>
-          <div className="mt-3 text-sm tracking-wide text-text/70">{s.label}</div>
-        </div>
-      ))}
-      <p className="col-span-full text-center text-xs text-text/40">{statsNote}</p>
+        ))}
+      </div>
+      <p className="mt-10 text-center text-[11px] text-white/35">{statsNote}</p>
     </div>
   );
 }
