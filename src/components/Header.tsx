@@ -32,27 +32,25 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <a href="#hero" aria-label={site.fullName}>
           <Image
             src={scrolled ? "/images/logo-black.png" : "/images/logo-white.png"}
             alt={site.fullName}
-            width={55}
-            height={40}
+            width={50}
+            height={36}
             priority
-            className="h-10 w-auto"
+            className="h-9 w-auto"
           />
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {nav.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className={`font-display text-sm transition-colors ${
-                scrolled
-                  ? "text-text/80 hover:text-accent-deep"
-                  : "text-white/80 hover:text-white"
+              className={`display-en link-underline text-[11px] uppercase tracking-[0.2em] transition-colors ${
+                scrolled ? "text-text/70" : "text-white/75"
               }`}
             >
               {n.label}
@@ -60,9 +58,13 @@ export function Header() {
           ))}
           <a
             href="#contact"
-            className="rounded-full bg-gold px-4 py-2 text-sm font-bold text-text transition-all hover:-translate-y-0.5"
+            className={`display-en border px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] transition-colors ${
+              scrolled
+                ? "border-accent bg-accent text-white hover:bg-black"
+                : "border-white text-white hover:bg-white hover:text-text"
+            }`}
           >
-            ご予約・お問い合わせ
+            Reserve
           </a>
         </nav>
 
@@ -73,21 +75,21 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           <div className="space-y-1.5">
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
+            <span className={`block h-px w-7 ${scrolled ? "bg-text" : "bg-white"}`} />
+            <span className={`block h-px w-7 ${scrolled ? "bg-text" : "bg-white"}`} />
+            <span className={`block h-px w-7 ${scrolled ? "bg-text" : "bg-white"}`} />
           </div>
         </button>
       </div>
 
       {open && (
-        <nav className="border-t border-line bg-bg/95 px-5 py-4 backdrop-blur-xl md:hidden">
-          <ul className="flex flex-col gap-4">
+        <nav className="border-t border-line bg-white/95 px-6 py-5 backdrop-blur-xl md:hidden">
+          <ul className="flex flex-col">
             {nav.map((n) => (
-              <li key={n.href}>
+              <li key={n.href} className="border-b border-line last:border-0">
                 <a
                   href={n.href}
-                  className="font-display text-base text-text/90"
+                  className="display-en block py-3 text-sm uppercase tracking-[0.2em] text-text/80"
                   onClick={() => setOpen(false)}
                 >
                   {n.label}

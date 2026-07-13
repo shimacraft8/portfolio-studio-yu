@@ -15,61 +15,106 @@ import { Stats } from "@/src/components/Stats";
 import { VoiceCarousel } from "@/src/components/VoiceCarousel";
 import { Faq } from "@/src/components/Faq";
 
-/** セクション見出し（背景に大きなゴーストEN文字） */
+/** セクション見出し（細いルール＋広トラッキングEN＋和文） */
 function SectionHead({
   en,
-  title,
+  ja,
   center = false,
   dark = false,
 }: {
   en: string;
-  title: string;
+  ja: string;
   center?: boolean;
   dark?: boolean;
 }) {
   return (
-    <div className={`relative ${center ? "text-center" : ""}`}>
-      <span
-        aria-hidden
-        className={`pointer-events-none absolute -top-7 select-none whitespace-nowrap font-display text-[clamp(3.2rem,9vw,6.5rem)] font-extrabold leading-none sm:-top-10 ${
-          dark ? "text-white/[0.05]" : "text-text/[0.04]"
-        } ${center ? "left-1/2 -translate-x-1/2" : "left-0"}`}
+    <div className={center ? "text-center" : ""}>
+      <div
+        className={`flex items-center gap-4 ${center ? "justify-center" : ""}`}
       >
-        {en}
-      </span>
-      <span
-        className={`section-eyebrow relative font-display text-xs font-semibold uppercase ${
-          dark ? "text-white/45" : "text-text/45"
-        }`}
-      >
-        {en}
-      </span>
-      <h2
-        className={`fluid-h2 relative mt-3 font-extrabold ${
-          dark ? "text-white" : ""
-        }`}
-      >
-        {title}
+        <span
+          className={`h-px w-10 ${dark ? "bg-white/40" : "bg-text/30"}`}
+        />
+        <span
+          className={`display-en rule-label text-[11px] uppercase ${
+            dark ? "text-white/60" : "text-text/50"
+          }`}
+        >
+          {en}
+        </span>
+      </div>
+      <h2 className={`heading-ja fluid-h2 mt-5 ${dark ? "text-white" : ""}`}>
+        {ja}
       </h2>
     </div>
   );
 }
 
-/** チェックアイコン */
-function Check() {
+/** 主ボタン（塗り・シャープ・矢印） */
+function BtnFill({
+  href,
+  children,
+  external = false,
+  variant = "dark",
+  full = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+  variant?: "dark" | "light";
+  full?: boolean;
+}) {
+  const cls =
+    variant === "dark"
+      ? "bg-accent text-white hover:bg-black"
+      : "bg-white text-text hover:bg-white/90";
   return (
-    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] bg-gold">
-      <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" aria-hidden>
-        <path
-          d="M20 6L9 17l-5-5"
-          stroke="#17181a"
-          strokeWidth="3.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
+    <a
+      href={href}
+      {...(external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+      className={`group inline-flex items-center justify-center gap-3 px-9 py-4 text-xs font-medium tracking-[0.15em] transition-colors ${cls} ${
+        full ? "w-full sm:w-auto" : ""
+      }`}
+    >
+      {children}
+      <span className="transition-transform duration-300 group-hover:translate-x-1">
+        →
+      </span>
+    </a>
+  );
+}
+
+/** 副ボタン（枠線・シャープ） */
+function BtnLine({
+  href,
+  children,
+  external = false,
+  dark = false,
+  full = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+  dark?: boolean;
+  full?: boolean;
+}) {
+  const cls = dark
+    ? "border-white/50 text-white hover:bg-white hover:text-text"
+    : "border-text/30 text-text hover:bg-accent hover:text-white hover:border-accent";
+  return (
+    <a
+      href={href}
+      {...(external
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+      className={`inline-flex items-center justify-center border px-9 py-4 text-xs font-medium tracking-[0.15em] transition-colors ${cls} ${
+        full ? "w-full sm:w-auto" : ""
+      }`}
+    >
+      {children}
+    </a>
   );
 }
 
@@ -91,9 +136,9 @@ export default function Home() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-bg" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/75" />
 
-          <div className="relative z-10 mx-auto max-w-4xl px-5 text-center text-white">
+          <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
             <Reveal>
               <Image
                 src="/images/logo-white.png"
@@ -101,75 +146,73 @@ export default function Home() {
                 width={230}
                 height={168}
                 priority
-                className="mx-auto h-auto w-40 drop-shadow-[0_6px_24px_rgba(0,0,0,0.35)] sm:w-52"
+                className="mx-auto h-auto w-36 sm:w-48"
               />
             </Reveal>
-            <Reveal delay={0.1}>
-              <h1 className="fluid-hero mt-8 font-extrabold tracking-tight">
+            <Reveal delay={0.12}>
+              <h1 className="fluid-hero mt-10">
                 鍛える、整える、
                 <br className="sm:hidden" />
                 続けられる。
               </h1>
             </Reveal>
-            <Reveal delay={0.2}>
-              <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+            <Reveal delay={0.22}>
+              <p className="mx-auto mt-7 max-w-lg text-[13px] font-light leading-loose tracking-wider text-white/80 sm:text-sm">
                 {site.area}の完全マンツーマン・パーソナルジム。
                 <br className="hidden sm:block" />
                 あなただけの空間で、一生使える体づくりを。
               </p>
             </Reveal>
-            <Reveal delay={0.25}>
-              <span className="mt-6 inline-block rounded-full border border-gold/60 bg-gold/15 px-5 py-1.5 text-xs font-bold tracking-wide text-gold backdrop-blur-sm">
-                入会金 {campaign.before} → {campaign.after} キャンペーン中
-              </span>
-            </Reveal>
             <Reveal delay={0.3}>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a
-                  href="#contact"
-                  className="w-full rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-text shadow-lg shadow-black/30 transition-transform hover:-translate-y-0.5 sm:w-auto"
-                >
+              <p className="mt-8 flex items-center justify-center gap-4 text-[11px] tracking-[0.25em] text-white/70">
+                <span className="h-px w-6 bg-white/40" />
+                入会金 {campaign.before} → {campaign.after}
+                <span className="h-px w-6 bg-white/40" />
+              </p>
+            </Reveal>
+            <Reveal delay={0.38}>
+              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <BtnFill href="#contact" variant="light" full>
                   体験・ご予約はこちら
-                </a>
-                <a
-                  href="#concept"
-                  className="w-full rounded-full border border-white/50 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
-                >
+                </BtnFill>
+                <BtnLine href="#concept" dark full>
                   {site.name} について
-                </a>
+                </BtnLine>
               </div>
             </Reveal>
           </div>
 
           {/* スクロールインジケータ */}
-          <div className="absolute bottom-24 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 md:bottom-10">
-            <span className="font-display text-[10px] tracking-[0.35em] text-white/50">
+          <div className="absolute bottom-24 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 md:bottom-10">
+            <span className="display-en text-[10px] tracking-[0.4em] text-white/50">
               SCROLL
             </span>
-            <span className="h-10 w-px animate-pulse bg-white/40" />
+            <span className="h-12 w-px animate-pulse bg-white/40" />
           </div>
         </section>
 
         {/* ============ CONCEPT ============ */}
-        <section id="concept" className="mx-auto max-w-6xl px-5 py-24 sm:py-32">
+        <section
+          id="concept"
+          className="mx-auto max-w-6xl px-6 py-28 sm:py-40"
+        >
           <Reveal>
-            <SectionHead en="CONCEPT" title="「続けられる」を、設計する。" />
-            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-text/70 sm:text-base">
+            <SectionHead en="Concept" ja="「続けられる」を、設計する。" />
+            <p className="mt-8 max-w-xl text-sm font-light leading-loose tracking-wide text-text/70">
               ただ追い込むだけでは続きません。{site.name}
               は、姿勢や動きの質から整え、生活に馴染む強度であなたの変化を伴走します。
             </p>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-px border-t border-line md:grid-cols-3">
             {concepts.map((c, i) => (
               <Reveal key={c.no} delay={i * 0.1}>
-                <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.3)]">
-                  <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-300 group-hover:scale-x-100" />
-                  <span className="font-display text-4xl font-extrabold text-text/10 transition-colors duration-300 group-hover:text-text/25">
+                <div className="group h-full border-t border-line pt-8 md:border-l md:border-t-0 md:pl-8 md:pt-0 md:first:border-l-0">
+                  <span className="display-en text-sm tracking-[0.2em] text-text/35">
                     {c.no}
                   </span>
-                  <h3 className="mt-4 text-lg font-bold">{c.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-text/70">
+                  <h3 className="heading-ja mt-5 text-lg">{c.title}</h3>
+                  <p className="mt-4 text-[13px] font-light leading-loose text-text/65">
                     {c.body}
                   </p>
                 </div>
@@ -178,9 +221,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============ STATS（黒帯バンド） ============ */}
-        <section className="bg-accent py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl px-5">
+        {/* ============ STATS（黒帯） ============ */}
+        <section className="bg-accent py-20 sm:py-24">
+          <div className="mx-auto max-w-5xl px-6">
             <Reveal>
               <Stats />
             </Reveal>
@@ -188,11 +231,14 @@ export default function Home() {
         </section>
 
         {/* ============ TRAINER ============ */}
-        <section id="trainer" className="mx-auto max-w-6xl px-5 py-24 sm:py-32">
-          <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-12">
-            <Reveal>
-              <div className="relative mx-auto mb-10 w-full max-w-sm sm:mb-0">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-[0_32px_64px_-32px_rgba(0,0,0,0.4)]">
+        <section
+          id="trainer"
+          className="mx-auto max-w-6xl px-6 py-28 sm:py-40"
+        >
+          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-12 md:gap-16">
+            <Reveal className="md:col-span-5">
+              <div className="relative mx-auto w-full max-w-sm">
+                <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
                     src={trainer.image}
                     alt={trainer.imageAlt}
@@ -201,38 +247,43 @@ export default function Home() {
                     className="object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-8 -right-3 aspect-square w-32 overflow-hidden rounded-2xl border-4 border-bg shadow-xl sm:-right-8 sm:w-40">
+                <div className="absolute -bottom-6 -right-4 aspect-square w-28 overflow-hidden border-[6px] border-white sm:-right-6 sm:w-36">
                   <Image
                     src={trainer.imageSub}
                     alt={trainer.imageSubAlt}
                     fill
-                    sizes="160px"
+                    sizes="144px"
                     className="object-cover object-top"
                   />
                 </div>
               </div>
             </Reveal>
-            <Reveal delay={0.1}>
-              <SectionHead en="TRAINER" title={trainer.name} />
-              <p className="mt-1 font-display text-sm tracking-widest text-text/50">
+            <Reveal delay={0.1} className="md:col-span-7">
+              <SectionHead en="Trainer" ja={trainer.name} />
+              <p className="display-en mt-2 text-xs tracking-[0.3em] text-text/40">
                 {trainer.nameEn}
               </p>
-              <p className="mt-3 text-sm font-bold">{trainer.role}</p>
+              <p className="mt-5 text-[13px] tracking-wide text-text/70">
+                {trainer.role}
+              </p>
 
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                 {trainer.tags.map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-text/20 bg-card px-3 py-1.5 text-xs text-text/80"
+                    className="text-[11px] tracking-[0.15em] text-text/55"
                   >
-                    {t}
+                    ／ {t}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-6 space-y-4 border-l-2 border-gold pl-5">
+              <div className="mt-8 space-y-5 border-l border-text/20 pl-6">
                 {trainer.message.map((m, i) => (
-                  <p key={i} className="text-sm leading-relaxed text-text/75">
+                  <p
+                    key={i}
+                    className="text-[13px] font-light leading-loose text-text/75"
+                  >
                     {m}
                   </p>
                 ))}
@@ -242,24 +293,21 @@ export default function Home() {
         </section>
 
         {/* ============ MENU ============ */}
-        <section
-          id="menu"
-          className="border-y border-line bg-card2/50 py-24 sm:py-32"
-        >
-          <div className="mx-auto max-w-6xl px-5">
+        <section id="menu" className="bg-card2 py-28 sm:py-40">
+          <div className="mx-auto max-w-6xl px-6">
             <Reveal>
-              <SectionHead en="MENU" title="対応メニュー" />
+              <SectionHead en="Menu" ja="対応メニュー" />
             </Reveal>
-            <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="mt-16 grid grid-cols-1 border-t border-line md:grid-cols-2">
               {menus.map((m, i) => (
-                <Reveal key={m.title} delay={i * 0.08}>
-                  <div className="group flex h-full gap-5 rounded-2xl border border-line bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.3)]">
-                    <span className="font-display text-2xl font-extrabold text-text/15 transition-colors group-hover:text-text/35">
+                <Reveal key={m.title} delay={i * 0.06}>
+                  <div className="group flex gap-6 border-b border-line py-8 md:px-8 md:[&:nth-child(odd)]:border-r">
+                    <span className="display-en pt-1 text-2xl tracking-[0.1em] text-text/25 transition-colors group-hover:text-text/60">
                       0{i + 1}
                     </span>
                     <div>
-                      <h3 className="text-lg font-bold">{m.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-text/70">
+                      <h3 className="heading-ja text-lg">{m.title}</h3>
+                      <p className="mt-3 text-[13px] font-light leading-loose text-text/65">
                         {m.body}
                       </p>
                     </div>
@@ -271,142 +319,145 @@ export default function Home() {
         </section>
 
         {/* ============ PRICE ============ */}
-        <section id="price" className="mx-auto max-w-6xl px-5 py-24 sm:py-32">
+        <section id="price" className="mx-auto max-w-6xl px-6 py-28 sm:py-40">
           <Reveal>
-            <SectionHead en="PRICE" title="料金プラン" />
+            <SectionHead en="Price" ja="料金プラン" />
           </Reveal>
 
           {/* キャンペーン: 入会金0円＋体験 */}
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="mt-16 grid border border-line md:grid-cols-2">
             <Reveal>
-              <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-                <div className="bg-accent py-3 text-center font-display text-sm font-bold tracking-[0.2em] text-white">
+              <div className="flex h-full flex-col justify-center border-b border-line px-8 py-12 text-center md:border-b-0 md:border-r">
+                <p className="display-en rule-label text-[11px] uppercase text-text/45">
                   {campaign.item}
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center px-6 py-9 text-center">
-                  <p className="text-sm text-text/45 line-through">
-                    {campaign.before}
-                  </p>
-                  <p className="mt-1 font-display text-6xl font-extrabold leading-none text-gold-deep">
-                    0<span className="ml-1 text-2xl">円</span>
-                  </p>
-                  <p className="mt-5 max-w-xs text-xs leading-relaxed text-text/60">
-                    {campaign.entryNote}
-                  </p>
-                </div>
+                </p>
+                <p className="mt-4 text-xs text-text/40 line-through">
+                  {campaign.before}
+                </p>
+                <p className="display-en mt-1 text-6xl font-light leading-none">
+                  0<span className="ml-1 text-xl">円</span>
+                </p>
+                <p className="mx-auto mt-6 max-w-xs text-xs font-light leading-loose text-text/55">
+                  {campaign.entryNote}
+                </p>
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-                <div className="bg-accent py-3 text-center font-display text-sm font-bold tracking-[0.2em] text-white">
+              <div className="flex h-full flex-col justify-center px-8 py-12 sm:px-12">
+                <p className="display-en rule-label text-center text-[11px] uppercase text-text/45">
                   {campaign.trial.title}
-                </div>
-                <div className="flex flex-1 flex-col justify-center gap-4 px-7 py-9 sm:px-10">
+                </p>
+                <div className="mt-6 space-y-4">
                   {campaign.trial.rows.map((r) => (
                     <div
                       key={r.label}
-                      className="flex items-baseline justify-between gap-4"
+                      className="flex items-baseline justify-between gap-4 border-b border-line pb-3"
                     >
-                      <span className="text-sm font-bold">{r.label}</span>
-                      <span
-                        className={`font-display text-3xl font-extrabold ${
-                          r.value === "無料" ? "text-gold-deep" : ""
-                        }`}
-                      >
+                      <span className="text-[13px] tracking-wide text-text/70">
+                        {r.label}
+                      </span>
+                      <span className="display-en text-2xl font-light">
                         {r.value}
                       </span>
                     </div>
                   ))}
-                  <p className="mt-1 text-xs leading-relaxed text-text/60">
-                    {campaign.trial.note}
-                  </p>
                 </div>
+                <p className="mt-5 text-xs font-light leading-loose text-text/55">
+                  {campaign.trial.note}
+                </p>
               </div>
             </Reveal>
           </div>
 
           {/* 料金グループ */}
-          <div className="mt-12 space-y-8">
+          <div className="mt-16 space-y-16">
             {priceGroups.map((g, gi) => (
-              <Reveal key={g.name} delay={gi * 0.06}>
-                <div className="rounded-3xl bg-card2/60 p-6 sm:p-10">
-                  <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+              <Reveal key={g.name} delay={gi * 0.05}>
+                <div>
+                  <div className="flex flex-col gap-5 border-b border-line pb-6 md:flex-row md:items-end md:justify-between">
                     <div>
-                      <p className="section-eyebrow font-display text-[10px] font-semibold uppercase text-text/40">
+                      <p className="display-en rule-label text-[11px] uppercase text-text/40">
                         {g.en}
                       </p>
-                      <div className="mt-1.5 flex items-center gap-3">
-                        <span className="h-6 w-1 rounded-full bg-gold" />
-                        <h3 className="font-display text-xl font-extrabold sm:text-2xl">
+                      <div className="mt-2 flex items-baseline gap-3">
+                        <h3 className="heading-ja text-xl sm:text-2xl">
                           {g.name}
                         </h3>
                         {g.note && (
-                          <span className="rounded-full border border-text/20 px-2.5 py-0.5 text-[11px] text-text/60">
-                            {g.note}
+                          <span className="text-[11px] tracking-wide text-text/50">
+                            （{g.note}）
                           </span>
                         )}
                       </div>
                     </div>
-                    <ul className="space-y-1.5">
+                    <ul className="flex flex-wrap gap-x-6 gap-y-1">
                       {g.for.map((f) => (
                         <li
                           key={f}
-                          className="flex items-center gap-2 text-xs text-text/70 sm:text-sm"
+                          className="text-[11px] tracking-[0.12em] text-text/55"
                         >
-                          <Check />
-                          {f}
+                          — {f}
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   <div
-                    className={`mt-7 grid grid-cols-2 gap-4 ${
+                    className={`mt-8 grid grid-cols-2 gap-px bg-line ${
                       g.plans.length >= 4
                         ? "md:grid-cols-4"
-                        : "md:mx-auto md:max-w-xl"
+                        : "md:mx-auto md:max-w-2xl md:grid-cols-2"
                     }`}
                   >
                     {g.plans.map((p) => (
-                      <div key={p.name} className="relative">
+                      <div
+                        key={p.name}
+                        className={`relative ${
+                          p.recommended
+                            ? "bg-accent text-white"
+                            : "bg-white text-text"
+                        }`}
+                      >
                         {p.recommended && (
-                          <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-4 py-1 text-xs font-bold text-text shadow-md">
-                            おすすめ
+                          <span className="absolute right-0 top-0 bg-white px-3 py-1 text-[10px] font-medium tracking-[0.2em] text-text">
+                            RECOMMEND
                           </span>
                         )}
-                        <div
-                          className={`h-full overflow-hidden rounded-xl bg-card text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.35)] ${
-                            p.recommended
-                              ? "border-2 border-gold shadow-[0_16px_40px_-16px_rgba(240,180,41,0.45)]"
-                              : "border border-line"
-                          }`}
-                        >
-                          <div className="bg-accent py-2.5 font-display text-sm font-bold text-white">
+                        <div className="px-5 py-10 text-center">
+                          <p className="display-en text-sm tracking-[0.2em]">
                             {p.name}
-                          </div>
-                          <div className="px-3 py-6">
-                            <p className="text-[11px] tracking-wider text-text/50">
-                              1回あたり
-                            </p>
-                            <p
-                              className={`mt-1 font-display text-3xl font-extrabold ${
-                                p.recommended ? "text-gold-deep" : ""
+                          </p>
+                          <p
+                            className={`mt-6 text-[10px] tracking-[0.2em] ${
+                              p.recommended ? "text-white/55" : "text-text/45"
+                            }`}
+                          >
+                            1回あたり
+                          </p>
+                          <p className="display-en mt-1 text-4xl font-light">
+                            {p.per}
+                            <span
+                              className={`ml-1 text-sm ${
+                                p.recommended
+                                  ? "text-white/70"
+                                  : "text-text/60"
                               }`}
                             >
-                              {p.per}
-                              <span className="ml-0.5 text-sm font-bold text-text/60">
-                                円
-                              </span>
+                              円
+                            </span>
+                          </p>
+                          <p
+                            className={`mt-4 text-[11px] tracking-wide ${
+                              p.recommended ? "text-white/60" : "text-text/50"
+                            }`}
+                          >
+                            {g.totalLabel} {p.total}円
+                          </p>
+                          {p.reason && (
+                            <p className="mt-3 text-[11px] font-light leading-snug text-white/75">
+                              {p.reason}
                             </p>
-                            <p className="mt-3 text-xs text-text/55">
-                              {g.totalLabel} {p.total}円
-                            </p>
-                            {p.reason && (
-                              <p className="mt-2 text-[11px] font-bold leading-snug text-gold-deep">
-                                {p.reason}
-                              </p>
-                            )}
-                          </div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -415,58 +466,62 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-text/50">{priceNote}</p>
+          <p className="mt-10 text-center text-[11px] tracking-wide text-text/45">
+            {priceNote}
+          </p>
         </section>
 
         {/* ============ VOICE ============ */}
-        <section className="border-y border-line bg-card2/50 py-24 sm:py-32">
-          <div className="mx-auto max-w-6xl px-5">
+        <section className="bg-card2 py-28 sm:py-40">
+          <div className="mx-auto max-w-6xl px-6">
             <Reveal>
-              <SectionHead en="VOICE" title="お客様の声" center />
+              <SectionHead en="Voice" ja="お客様の声" center />
             </Reveal>
-            <div className="mt-12">
+            <div className="mt-16">
               <VoiceCarousel />
             </div>
           </div>
         </section>
 
         {/* ============ ACCESS / FAQ ============ */}
-        <section id="access" className="mx-auto max-w-6xl px-5 py-24 sm:py-32">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-12">
+        <section id="access" className="mx-auto max-w-6xl px-6 py-28 sm:py-40">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             <Reveal>
-              <SectionHead en="ACCESS" title="アクセス" />
-              <p className="mt-5 text-sm leading-relaxed text-text/70">
+              <SectionHead en="Access" ja="アクセス" />
+              <p className="mt-8 text-[13px] font-light leading-loose tracking-wide text-text/70">
                 完全予約制のプライベートジムです。詳しい住所・道順は、ご予約の際に個別にご案内いたします。安心してお越しください。
               </p>
-              <dl className="mt-7 space-y-0 divide-y divide-line rounded-2xl border border-line bg-card px-6 py-2 shadow-sm">
-                <div className="flex gap-4 py-3.5">
-                  <dt className="w-20 shrink-0 text-sm text-text/50">所在地</dt>
-                  <dd className="text-sm text-text/85">
+              <dl className="mt-8 border-t border-line">
+                <div className="flex gap-6 border-b border-line py-4">
+                  <dt className="display-en w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-text/40">
+                    Location
+                  </dt>
+                  <dd className="text-[13px] text-text/80">
                     {site.area}
                     <br />
-                    <span className="text-xs text-text/45">
+                    <span className="text-[11px] text-text/45">
                       {site.areaNote}
                     </span>
                   </dd>
                 </div>
-                <div className="flex gap-4 py-3.5">
-                  <dt className="w-20 shrink-0 text-sm text-text/50">
-                    営業形態
+                <div className="flex gap-6 border-b border-line py-4">
+                  <dt className="display-en w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-text/40">
+                    Style
                   </dt>
-                  <dd className="text-sm text-text/85">{site.format}</dd>
+                  <dd className="text-[13px] text-text/80">{site.format}</dd>
                 </div>
-                <div className="flex gap-4 py-3.5">
-                  <dt className="w-20 shrink-0 text-sm text-text/50">
-                    営業時間
+                <div className="flex gap-6 border-b border-line py-4">
+                  <dt className="display-en w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-text/40">
+                    Hours
                   </dt>
-                  <dd className="text-sm text-text/85">{site.hours}</dd>
+                  <dd className="text-[13px] text-text/80">{site.hours}</dd>
                 </div>
               </dl>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <SectionHead en="FAQ" title="よくある質問" />
-              <div className="mt-7">
+              <SectionHead en="FAQ" ja="よくある質問" />
+              <div className="mt-8">
                 <Faq />
               </div>
             </Reveal>
@@ -474,61 +529,53 @@ export default function Home() {
         </section>
 
         {/* ============ CONTACT（黒セクション） ============ */}
-        <section id="contact" className="bg-accent py-24 text-white sm:py-32">
-          <div className="mx-auto max-w-3xl px-5 text-center">
+        <section id="contact" className="bg-accent py-28 text-white sm:py-40">
+          <div className="mx-auto max-w-3xl px-6 text-center">
             <Reveal>
               <SectionHead
-                en="CONTACT"
-                title="まずは、お気軽にご相談を。"
+                en="Contact"
+                ja="まずは、お気軽にご相談を。"
                 center
                 dark
               />
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-white/70">
+              <p className="mx-auto mt-8 max-w-xl text-[13px] font-light leading-loose tracking-wide text-white/70">
                 ご予約・体験のお申し込み・ご質問は、Instagram の DM
                 またはお電話で承っています。あなたの目標やお悩みをお聞かせください。
               </p>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a
-                  href={site.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full rounded-full bg-gold px-8 py-3.5 text-sm font-bold text-text transition-transform hover:-translate-y-0.5 sm:w-auto"
-                >
+              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <BtnFill href={site.instagram} external variant="light" full>
                   Instagram DM で予約する
-                </a>
-                <a
-                  href={`tel:${site.telLink}`}
-                  className="w-full rounded-full border border-white/40 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
-                >
+                </BtnFill>
+                <BtnLine href={`tel:${site.telLink}`} dark full>
                   電話する（{site.tel}）
-                </a>
+                </BtnLine>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="mt-10 flex flex-col items-center gap-2 text-sm text-white/60">
+              <div className="mt-12 flex flex-col items-center gap-3 text-xs tracking-wide text-white/55">
                 <a
                   href={`tel:${site.telLink}`}
-                  className="transition-colors hover:text-white"
+                  className="link-underline transition-colors hover:text-white"
                 >
-                  TEL：{site.tel}
+                  TEL {site.tel}
                 </a>
                 <a
                   href={`mailto:${site.email}`}
-                  className="transition-colors hover:text-white"
+                  className="link-underline transition-colors hover:text-white"
                 >
-                  Mail：{site.email}
+                  MAIL {site.email}
                 </a>
                 <a
                   href={site.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-white"
+                  className="link-underline transition-colors hover:text-white"
                 >
-                  Instagram：{site.instagramHandle}
+                  INSTAGRAM {site.instagramHandle}
                 </a>
               </div>
             </Reveal>
@@ -537,19 +584,20 @@ export default function Home() {
       </main>
 
       {/* ============ FOOTER ============ */}
-      <footer className="border-t border-line bg-bg py-12">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-5 text-center">
+      <footer className="border-t border-line bg-white py-14">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 text-center">
           <Image
             src="/images/logo-black.png"
             alt={site.fullName}
-            width={96}
-            height={70}
-            className="h-auto w-24"
+            width={88}
+            height={64}
+            className="h-auto w-20"
           />
-          <p className="text-xs text-text/50">{site.area}</p>
-          <p className="text-xs text-text/50">TEL：{site.tel}</p>
-          <p className="mt-3 text-xs text-text/35">
-            © {new Date().getFullYear()} {site.fullName}
+          <p className="text-[11px] tracking-[0.15em] text-text/50">
+            {site.area}　／　TEL {site.tel}
+          </p>
+          <p className="display-en mt-2 text-[10px] tracking-[0.2em] text-text/35">
+            © {new Date().getFullYear()} {site.fullName.toUpperCase()}
           </p>
         </div>
       </footer>

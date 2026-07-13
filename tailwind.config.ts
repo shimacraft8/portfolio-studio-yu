@@ -8,15 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#f4f5f6", // ライトグレー（LYFT系モノトーン）
-        accent: "#17181a", // ほぼ黒（CTA・強調）
+        bg: "#ffffff", // 白（LYFT: 白×黒の高コントラスト）
+        accent: "#111214", // ほぼ黒（黒帯セクション・CTA）
         "accent-deep": "#000000",
-        text: "#17181a", // ほぼ黒
+        text: "#111214", // ほぼ黒
         card: "#ffffff",
-        card2: "#eceef0", // やや濃いグレー
-        line: "#e0e3e6", // 罫線
-        gold: "#f0b429", // シグナルカラー（CTA・おすすめ・キャンペーン）
-        "gold-deep": "#c88a00", // ゴールド濃色（白背景上の数字・テキスト用）
+        card2: "#f4f4f5", // 淡グレー（交互パネル用）
+        line: "#e4e4e7", // 罫線
       },
       fontFamily: {
         outfit: ["var(--font-outfit)", "sans-serif"],

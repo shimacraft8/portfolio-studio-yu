@@ -8,24 +8,24 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="space-y-3">
+    <div className="border-t border-line">
       {faqs.map((f, i) => {
         const isOpen = open === i;
         return (
-          <div
-            key={i}
-            className="overflow-hidden rounded-xl border border-line bg-card shadow-sm"
-          >
+          <div key={i} className="border-b border-line">
             <button
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+              className="flex w-full items-center justify-between gap-4 py-5 text-left"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : i)}
             >
-              <span className="text-sm font-bold text-text sm:text-base">
+              <span className="flex items-baseline gap-3 text-[13px] tracking-wide text-text sm:text-sm">
+                <span className="display-en text-[11px] text-text/40">
+                  Q{i + 1}
+                </span>
                 {f.q}
               </span>
               <span
-                className={`shrink-0 font-bold text-gold-deep transition-transform duration-300 ${
+                className={`shrink-0 text-lg font-light text-text/50 transition-transform duration-300 ${
                   isOpen ? "rotate-45" : ""
                 }`}
               >
@@ -40,7 +40,7 @@ export function Faq() {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <p className="px-5 pb-5 text-sm leading-relaxed text-text/70">
+                  <p className="pb-6 pl-8 pr-6 text-[13px] font-light leading-loose text-text/65">
                     {f.a}
                   </p>
                 </motion.div>

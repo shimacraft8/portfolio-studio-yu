@@ -50,10 +50,10 @@ export function Stats() {
 
   return (
     <div ref={ref}>
-      <div className="grid grid-cols-1 gap-10 divide-y divide-white/10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-y-0">
+      <div className="grid grid-cols-1 gap-12 divide-y divide-white/10 sm:grid-cols-3 sm:gap-6 sm:divide-x sm:divide-y-0">
         {stats.map((s) => (
-          <div key={s.label} className="pt-10 text-center first:pt-0 sm:pt-0">
-            <div className="font-display text-6xl font-extrabold text-gold">
+          <div key={s.label} className="pt-12 text-center first:pt-0 sm:pt-0">
+            <div className="display-en text-6xl font-light text-white sm:text-7xl">
               <Counter
                 value={s.value}
                 suffix={s.suffix}
@@ -61,13 +61,15 @@ export function Stats() {
                 active={inView}
               />
             </div>
-            <div className="mt-3 text-xs tracking-[0.25em] text-white/55">
+            <div className="mt-4 text-[11px] tracking-[0.3em] text-white/50">
               {s.label}
             </div>
           </div>
         ))}
       </div>
-      <p className="mt-10 text-center text-[11px] text-white/35">{statsNote}</p>
+      <p className="mt-12 text-center text-[10px] tracking-[0.2em] text-white/30">
+        {statsNote}
+      </p>
     </div>
   );
 }

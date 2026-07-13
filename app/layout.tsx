@@ -7,14 +7,14 @@ import { Analytics } from "@/src/components/Analytics";
 
 const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-outfit",
   display: "swap",
 });
 
 const noto = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "500", "700"],
   variable: "--font-noto",
   display: "swap",
 });
