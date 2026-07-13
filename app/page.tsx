@@ -4,7 +4,8 @@ import {
   concepts,
   trainer,
   menus,
-  plans,
+  campaign,
+  priceGroups,
   priceNote,
 } from "@/src/data/site";
 import { Header } from "@/src/components/Header";
@@ -16,7 +17,7 @@ import { Faq } from "@/src/components/Faq";
 
 function Eyebrow({ children }: { children: string }) {
   return (
-    <span className="section-eyebrow font-display text-xs font-semibold uppercase text-accent">
+    <span className="section-eyebrow font-display text-xs font-semibold uppercase text-text/45">
       {children}
     </span>
   );
@@ -34,48 +35,57 @@ export default function Home() {
         >
           <Image
             src="/images/gym-interior.jpg"
-            alt="STUDIO YU のトレーニング空間"
+            alt={`${site.fullName} のトレーニング空間`}
             fill
             priority
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2a1a10]/80 via-[#3a2414]/60 to-bg" />
-          <div className="absolute inset-0 bg-[#c47a4a]/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-bg" />
 
-          <div className="relative z-10 mx-auto max-w-4xl px-5 text-center text-[#fdf6ea]">
+          <div className="relative z-10 mx-auto max-w-4xl px-5 text-center text-white">
             <Reveal>
-              <span className="section-eyebrow font-display text-xs font-semibold uppercase text-[#f0c79e]">
-                Private Personal Gym — Okayama
-              </span>
+              <Image
+                src="/images/logo-white.png"
+                alt={site.fullName}
+                width={230}
+                height={168}
+                priority
+                className="mx-auto h-auto w-40 sm:w-52"
+              />
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="fluid-hero mt-5 font-extrabold tracking-tight">
+              <h1 className="fluid-hero mt-8 font-extrabold tracking-tight">
                 鍛える、整える、
                 <br className="sm:hidden" />
                 続けられる。
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-[#fdf6ea]/85 sm:text-base">
+              <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
                 {site.area}の完全マンツーマン・パーソナルジム。
                 <br className="hidden sm:block" />
                 あなただけの空間で、一生使える体づくりを。
               </p>
             </Reveal>
+            <Reveal delay={0.25}>
+              <span className="mt-6 inline-block rounded-full border border-white/40 bg-white/10 px-5 py-1.5 text-xs font-bold tracking-wide backdrop-blur-sm">
+                入会金 {campaign.before} → {campaign.after} キャンペーン中
+              </span>
+            </Reveal>
             <Reveal delay={0.3}>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="#contact"
-                  className="w-full rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#2a1a10]/30 transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-bold text-text shadow-lg shadow-black/30 transition-transform hover:-translate-y-0.5 sm:w-auto"
                 >
                   体験・ご予約はこちら
                 </a>
                 <a
                   href="#concept"
-                  className="w-full rounded-full border border-white/50 px-8 py-3.5 text-sm font-bold text-[#fdf6ea] transition-colors hover:border-accent hover:bg-white/10 sm:w-auto"
+                  className="w-full rounded-full border border-white/50 px-8 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
                 >
-                  STUDIO YU について
+                  {site.name} について
                 </a>
               </div>
             </Reveal>
@@ -90,7 +100,7 @@ export default function Home() {
               「続けられる」を、設計する。
             </h2>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-text/70 sm:text-base">
-              ただ追い込むだけでは続きません。STUDIO YU
+              ただ追い込むだけでは続きません。{site.name}
               は、姿勢や動きの質から整え、生活に馴染む強度であなたの変化を伴走します。
             </p>
           </Reveal>
@@ -203,41 +213,56 @@ export default function Home() {
             <Eyebrow>Price</Eyebrow>
             <h2 className="fluid-h2 mt-3 font-extrabold">料金プラン</h2>
           </Reveal>
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {plans.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.1}>
-                <div
-                  className={`relative flex h-full flex-col rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1.5 ${
-                    p.popular
-                      ? "border-accent bg-card2 shadow-[0_20px_50px_-20px_rgba(196,122,74,0.4)]"
-                      : "border-line bg-card"
-                  }`}
-                >
-                  {p.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-bold text-white">
-                      人気
-                    </span>
-                  )}
-                  <h3 className="text-center text-sm font-bold text-text/80">
-                    {p.name}
-                  </h3>
-                  <div className="mt-4 text-center">
-                    <span className="font-display text-4xl font-extrabold">
-                      {p.price}
-                    </span>
-                    <span className="ml-1 text-base text-text/70">{p.unit}</span>
+          {/* キャンペーンバナー */}
+          <Reveal delay={0.05}>
+            <div className="mx-auto mt-10 max-w-3xl rounded-2xl bg-accent px-6 py-9 text-center text-white shadow-[0_24px_50px_-24px_rgba(0,0,0,0.5)]">
+              <p className="section-eyebrow font-display text-xs font-semibold uppercase text-white/50">
+                {campaign.label}
+              </p>
+              <p className="mt-4 text-2xl font-extrabold sm:text-3xl">
+                {campaign.item}{" "}
+                <span className="text-white/45 line-through">
+                  {campaign.before}
+                </span>{" "}
+                <span className="mx-1 text-white/60">→</span>
+                <span>{campaign.after}</span>
+              </p>
+              <p className="mt-4 text-xs leading-relaxed text-white/75 sm:text-sm">
+                {campaign.notes.join(" ／ ")}
+              </p>
+            </div>
+          </Reveal>
+
+          {/* 料金グループ */}
+          <div className="mx-auto mt-8 max-w-3xl space-y-6">
+            {priceGroups.map((g, gi) => (
+              <Reveal key={g.name} delay={gi * 0.08}>
+                <div className="overflow-hidden rounded-2xl border border-line bg-card">
+                  <div className="flex items-baseline justify-between border-b border-line bg-card2/60 px-6 py-4">
+                    <h3 className="font-bold">{g.name}</h3>
+                    {g.note && (
+                      <span className="text-xs text-text/50">{g.note}</span>
+                    )}
                   </div>
-                  <p className="mt-3 text-center text-xs text-text/50">{p.per}</p>
-                  <a
-                    href="#contact"
-                    className={`mt-7 rounded-full py-3 text-center text-sm font-bold transition-transform hover:-translate-y-0.5 ${
-                      p.popular
-                        ? "bg-accent text-white"
-                        : "border border-line text-text"
-                    }`}
-                  >
-                    このプランで相談
-                  </a>
+                  <ul className="divide-y divide-line">
+                    {g.plans.map((p) => (
+                      <li
+                        key={p.name}
+                        className="flex items-center justify-between gap-4 px-6 py-4"
+                      >
+                        <span className="text-sm font-bold">{p.name}</span>
+                        <span className="text-right">
+                          <span className="font-display text-2xl font-extrabold">
+                            {p.price}
+                          </span>
+                          <span className="ml-1 text-sm text-text/60">円</span>
+                          <span className="block text-xs text-text/45">
+                            {p.per}
+                          </span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -285,10 +310,6 @@ export default function Home() {
                 <div className="flex gap-4">
                   <dt className="w-20 shrink-0 text-text/50">営業時間</dt>
                   <dd className="text-text/85">{site.hours}</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="w-20 shrink-0 text-text/50">オープン</dt>
-                  <dd className="text-text/85">{site.open}</dd>
                 </div>
               </dl>
             </Reveal>
@@ -364,13 +385,17 @@ export default function Home() {
       {/* ============ FOOTER ============ */}
       <footer className="border-t border-line bg-bg py-12">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-5 text-center">
-          <div className="font-display text-xl font-extrabold tracking-wide">
-            {site.name}
-          </div>
+          <Image
+            src="/images/logo-black.png"
+            alt={site.fullName}
+            width={96}
+            height={70}
+            className="h-auto w-24"
+          />
           <p className="text-xs text-text/50">{site.area}</p>
           <p className="text-xs text-text/50">TEL：{site.tel}</p>
           <p className="mt-3 text-xs text-text/35">
-            © {new Date().getFullYear()} {site.name}
+            © {new Date().getFullYear()} {site.fullName}
           </p>
         </div>
       </footer>

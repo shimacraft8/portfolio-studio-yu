@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --accent: #c47a4a;
+  --accent: #17181a;
 }
 
 * {
@@ -16,8 +16,8 @@ html {
 }
 
 body {
-  background-color: #faf4ea;
-  color: #33271d;
+  background-color: #f4f5f6;
+  color: #17181a;
   font-family: var(--font-noto), sans-serif;
   overflow-x: hidden;
 }
@@ -46,10 +46,10 @@ h1, h2, h3, .font-display {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f3e9d8;
+  background: #eceef0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d8c4a6;
+  background: #c9ced3;
   border-radius: 8px;
 }
 

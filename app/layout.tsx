@@ -20,13 +20,15 @@ const noto = Noto_Sans_JP({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-studio-yu.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-studio-yu-pied.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${site.name} | 岡山県苫田郡鏡野町のパーソナルジム`,
+  title: `${site.fullName} | 岡山県苫田郡鏡野町のパーソナルジム`,
   description: site.description,
   keywords: [
+    "VISION",
+    "VISION Personal Gym",
     "パーソナルジム",
     "鏡野町",
     "岡山",
@@ -39,14 +41,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
     url: siteUrl,
-    title: `${site.name} | 岡山県苫田郡鏡野町のパーソナルジム`,
+    title: `${site.fullName} | 岡山県苫田郡鏡野町のパーソナルジム`,
     description: site.description,
-    siteName: site.name,
+    siteName: site.fullName,
     images: [{ url: "/images/gym-interior.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | 岡山県苫田郡鏡野町のパーソナルジム`,
+    title: `${site.fullName} | 岡山県苫田郡鏡野町のパーソナルジム`,
     description: site.description,
     images: ["/images/gym-interior.jpg"],
   },

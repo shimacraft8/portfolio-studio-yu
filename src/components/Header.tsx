@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { site } from "@/src/data/site";
 
 const nav = [
@@ -32,13 +33,15 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a
-          href="#hero"
-          className={`font-display text-lg font-extrabold tracking-wide transition-colors ${
-            scrolled ? "text-text" : "text-[#fdf6ea]"
-          }`}
-        >
-          {site.name}
+        <a href="#hero" aria-label={site.fullName}>
+          <Image
+            src={scrolled ? "/images/logo-black.png" : "/images/logo-white.png"}
+            alt={site.fullName}
+            width={55}
+            height={40}
+            priority
+            className="h-10 w-auto"
+          />
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
@@ -46,8 +49,10 @@ export function Header() {
             <a
               key={n.href}
               href={n.href}
-              className={`font-display text-sm transition-colors hover:text-accent ${
-                scrolled ? "text-text/80" : "text-[#fdf6ea]/90"
+              className={`font-display text-sm transition-colors ${
+                scrolled
+                  ? "text-text/80 hover:text-accent-deep"
+                  : "text-white/80 hover:text-white"
               }`}
             >
               {n.label}
@@ -55,7 +60,9 @@ export function Header() {
           ))}
           <a
             href="#contact"
-            className="rounded-full bg-accent px-4 py-2 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+            className={`rounded-full px-4 py-2 text-sm font-bold transition-all hover:-translate-y-0.5 ${
+              scrolled ? "bg-accent text-white" : "bg-white text-text"
+            }`}
           >
             ご予約・お問い合わせ
           </a>
@@ -68,9 +75,9 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           <div className="space-y-1.5">
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
-            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-[#fdf6ea]"}`} />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
+            <span className={`block h-0.5 w-6 ${scrolled ? "bg-text" : "bg-white"}`} />
           </div>
         </button>
       </div>

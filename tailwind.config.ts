@@ -8,13 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#faf4ea", // 温かみのあるクリーム
-        accent: "#c47a4a", // テラコッタ／琥珀
-        "accent-deep": "#a85f33",
-        text: "#33271d", // 温かい焦げ茶
-        card: "#fffaf2",
-        card2: "#f3e9d8",
-        line: "#e3d5bf", // 罫線
+        bg: "#f4f5f6", // ライトグレー（LYFT系モノトーン）
+        accent: "#17181a", // ほぼ黒（CTA・強調）
+        "accent-deep": "#000000",
+        text: "#17181a", // ほぼ黒
+        card: "#ffffff",
+        card2: "#eceef0", // やや濃いグレー
+        line: "#e0e3e6", // 罫線
       },
       fontFamily: {
         outfit: ["var(--font-outfit)", "sans-serif"],

@@ -5,8 +5,9 @@
 
 export const site = {
   // --- 店舗基本情報 -------------------------------------------------
-  name: "STUDIO YU", // ※仮名（店名決定後に差し替え）
-  nameJa: "スタジオ ユウ",
+  name: "VISION", // 正式決定（2026-07 戸田さんより）
+  fullName: "VISION Personal Gym",
+  nameJa: "ヴィジョン パーソナルジム",
   catch: "鍛える、整える、続けられる。",
   description:
     "岡山県苫田郡鏡野町の完全マンツーマン・パーソナルジム。トレーナーは1名、自宅を改装したプライベート空間。ボディメイク・ダイエット・姿勢改善・痛みケアまで、一人ひとりに合わせて伴走します。",
@@ -17,10 +18,9 @@ export const site = {
   email: "yu.fit.jp@gmail.com", // ※仮
   instagram: "https://www.instagram.com/yu_fitness_jp",
   instagramHandle: "@yu_fitness_jp",
-  open: "2025年夏 プレオープン予定",
   hours: "完全予約制（営業時間はご予約時に調整）",
   format: "完全マンツーマン / 1日数枠限定",
-  priceRange: "¥7,000〜",
+  priceRange: "¥4,350〜¥6,250（1回あたり）",
 } as const;
 
 // --- コンセプト（特徴）--------------------------------------------
@@ -89,28 +89,45 @@ export const menus = [
   },
 ];
 
-// --- 料金 ---------------------------------------------------------
-export const plans = [
+// --- キャンペーン（2026-07 戸田さん指定）---------------------------
+export const campaign = {
+  label: "Opening Campaign",
+  item: "入会金",
+  before: "11,000円",
+  after: "無料",
+  notes: [
+    "カウンセリング無料",
+    "カウンセリング時の体験トレーニング（20分）1,000円",
+  ],
+};
+
+// --- 料金（2026-07 戸田さん指定の正式料金）-------------------------
+export const priceGroups = [
   {
-    name: "都度利用",
-    price: "7,000",
-    unit: "円",
-    per: "1回あたり 7,000円",
-    popular: false,
+    name: "回数券",
+    note: "",
+    plans: [
+      { name: "4回", price: "25,000", per: "1回あたり 6,250円" },
+      { name: "8回", price: "48,000", per: "1回あたり 6,000円" },
+      { name: "16回", price: "90,000", per: "1回あたり 5,750円" },
+      { name: "24回", price: "132,000", per: "1回あたり 5,500円" },
+    ],
   },
   {
-    name: "4回プラン",
-    price: "26,000",
-    unit: "円",
-    per: "1回あたり 6,500円",
-    popular: true,
+    name: "月額コース",
+    note: "毎月自動引落",
+    plans: [
+      { name: "月4回コース", price: "22,000", per: "1回あたり 5,500円" },
+      { name: "月8回コース", price: "40,000", per: "1回あたり 5,000円" },
+    ],
   },
   {
-    name: "8回プラン",
-    price: "48,000",
-    unit: "円",
-    per: "1回あたり 6,000円",
-    popular: false,
+    name: "セミパーソナル",
+    note: "",
+    plans: [
+      { name: "4回", price: "18,000", per: "1回あたり 4,500円" },
+      { name: "8回", price: "35,000", per: "1回あたり 4,350円" }, // ※戸田さん原文ママ（35,000÷8=4,375のため要確認）
+    ],
   },
 ];
 export const priceNote = "表示はすべて税込です。";
