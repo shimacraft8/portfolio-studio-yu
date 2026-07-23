@@ -12,12 +12,12 @@ export function MobileCTA() {
         Tel
       </a>
       <a
-        href={site.instagram}
+        href={site.line}
         target="_blank"
         rel="noopener noreferrer"
         className="flex-[2] bg-white py-4 text-center text-[11px] font-medium uppercase tracking-[0.2em] text-text ring-1 ring-inset ring-accent"
       >
-        Instagram で予約
+        公式LINEで予約
       </a>
     </div>
   );

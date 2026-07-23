@@ -7,6 +7,7 @@ import {
   campaign,
   priceGroups,
   priceNote,
+  heroImages,
 } from "@/src/data/site";
 import { Header } from "@/src/components/Header";
 import { MobileCTA } from "@/src/components/MobileCTA";
@@ -14,6 +15,7 @@ import { Reveal } from "@/src/components/Reveal";
 import { Stats } from "@/src/components/Stats";
 import { VoiceCarousel } from "@/src/components/VoiceCarousel";
 import { Faq } from "@/src/components/Faq";
+import { HeroBackground } from "@/src/components/HeroBackground";
 
 /** セクション見出し（細いルール＋広トラッキングEN＋和文） */
 function SectionHead({
@@ -128,13 +130,9 @@ export default function Home() {
           id="hero"
           className="relative flex min-h-[100svh] items-center justify-center overflow-hidden"
         >
-          <Image
-            src="/images/gym-interior.jpg"
+          <HeroBackground
+            images={heroImages}
             alt={`${site.fullName} のトレーニング空間`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/75" />
 
@@ -149,8 +147,13 @@ export default function Home() {
                 className="mx-auto h-auto w-36 sm:w-48"
               />
             </Reveal>
-            <Reveal delay={0.12}>
-              <h1 className="fluid-hero mt-10">
+            <Reveal delay={0.1}>
+              <p className="display-en mt-6 text-[11px] tracking-[0.3em] text-white/60">
+                {site.tagline}
+              </p>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <h1 className="fluid-hero mt-6">
                 鍛える、整える、
                 <br className="sm:hidden" />
                 続けられる。
@@ -298,19 +301,16 @@ export default function Home() {
             <Reveal>
               <SectionHead en="Menu" ja="対応メニュー" />
             </Reveal>
-            <div className="mt-16 grid grid-cols-1 border-t border-line md:grid-cols-2">
+            <div className="mt-16 grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:grid-cols-5">
               {menus.map((m, i) => (
-                <Reveal key={m.title} delay={i * 0.06}>
-                  <div className="group flex gap-6 border-b border-line py-8 md:px-8 md:[&:nth-child(odd)]:border-r">
-                    <span className="display-en pt-1 text-2xl tracking-[0.1em] text-text/25 transition-colors group-hover:text-text/60">
+                <Reveal key={m} delay={i * 0.06}>
+                  <div className="group flex items-baseline gap-4 border-b border-line py-7 lg:flex-col lg:items-start lg:gap-6 lg:border-r lg:py-10 lg:pr-6 lg:last:border-r-0">
+                    <span className="display-en text-xs tracking-[0.2em] text-text/30 transition-colors group-hover:text-text/60">
                       0{i + 1}
                     </span>
-                    <div>
-                      <h3 className="heading-ja text-lg">{m.title}</h3>
-                      <p className="mt-3 text-[13px] font-light leading-loose text-text/65">
-                        {m.body}
-                      </p>
-                    </div>
+                    <h3 className="heading-ja text-[15px] lg:text-base">
+                      {m}
+                    </h3>
                   </div>
                 </Reveal>
               ))}
@@ -489,20 +489,25 @@ export default function Home() {
             <Reveal>
               <SectionHead en="Access" ja="アクセス" />
               <p className="mt-8 text-[13px] font-light leading-loose tracking-wide text-text/70">
-                完全予約制のプライベートジムです。詳しい住所・道順は、ご予約の際に個別にご案内いたします。安心してお越しください。
+                完全予約制のプライベートジムです。お車でお越しの際はご予約時にご案内いたします。
               </p>
+              <div className="mt-8 aspect-video w-full border border-line grayscale">
+                <iframe
+                  title={`${site.fullName} 地図`}
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(
+                    site.area
+                  )}&output=embed`}
+                  className="h-full w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
               <dl className="mt-8 border-t border-line">
                 <div className="flex gap-6 border-b border-line py-4">
                   <dt className="display-en w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-text/40">
                     Location
                   </dt>
-                  <dd className="text-[13px] text-text/80">
-                    {site.area}
-                    <br />
-                    <span className="text-[11px] text-text/45">
-                      {site.areaNote}
-                    </span>
-                  </dd>
+                  <dd className="text-[13px] text-text/80">{site.area}</dd>
                 </div>
                 <div className="flex gap-6 border-b border-line py-4">
                   <dt className="display-en w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-text/40">
@@ -539,16 +544,19 @@ export default function Home() {
                 dark
               />
               <p className="mx-auto mt-8 max-w-xl text-[13px] font-light leading-loose tracking-wide text-white/70">
-                ご予約・体験のお申し込み・ご質問は、Instagram の DM
-                またはお電話で承っています。あなたの目標やお悩みをお聞かせください。
+                ご予約・体験のお申し込み・ご質問は、公式LINE・Instagram の DM・
+                お電話で承っています。あなたの目標やお悩みをお聞かせください。
               </p>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <BtnFill href={site.instagram} external variant="light" full>
-                  Instagram DM で予約する
+              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+                <BtnFill href={site.line} external variant="light" full>
+                  公式LINEで予約する
                 </BtnFill>
+                <BtnLine href={site.instagram} external dark full>
+                  Instagram DM で予約する
+                </BtnLine>
                 <BtnLine href={`tel:${site.telLink}`} dark full>
                   電話する（{site.tel}）
                 </BtnLine>
@@ -557,6 +565,14 @@ export default function Home() {
 
             <Reveal delay={0.2}>
               <div className="mt-12 flex flex-col items-center gap-3 text-xs tracking-wide text-white/55">
+                <a
+                  href={site.line}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline transition-colors hover:text-white"
+                >
+                  LINE 公式アカウント
+                </a>
                 <a
                   href={`tel:${site.telLink}`}
                   className="link-underline transition-colors hover:text-white"

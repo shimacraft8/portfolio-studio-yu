@@ -18,10 +18,11 @@ export function StructuredData() {
     address: {
       "@type": "PostalAddress",
       addressRegion: "岡山県",
-      addressLocality: "苫田郡鏡野町",
+      addressLocality: "苫田郡鏡野町上森原",
+      streetAddress: "353-3",
       addressCountry: "JP",
     },
-    sameAs: [site.instagram],
+    sameAs: [site.instagram, site.line],
     makesOffer: priceGroups.flatMap((g) =>
       g.plans.map((p) => ({
         "@type": "Offer",
