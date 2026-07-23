@@ -12,17 +12,26 @@
 
 | 項目 | 内容 |
 |------|------|
-| 本番URL | https://portfolio-studio-yu-pied.vercel.app |
-| GitHub | https://github.com/shimacraft8/portfolio-studio-yu |
+| **本番URL（現行）** | **https://vision-personal-gym.vercel.app** |
+| Vercel scope（現行） | **vision888**（アカウント: visionr080808-1799 / vision.r080808@gmail.com） |
+| Vercelプロジェクト名 | vision-personal-gym |
+| GitHub（コード管理は引き続きこちら） | https://github.com/shimacraft8/portfolio-studio-yu |
 | ローカル | `/Users/hiroshikento/Documents/portfolio-studio-yu`（SHIMA CRAFT の隣・別リポジトリ） |
-| GitHubアカウント | shimacraft8 |
-| Vercel scope | **shimacraft8-6355s-projects**（他案件 shima-craft / haishin-calendar と同じ集約アカウント） |
 
-※2026-06-11 に Vercel を旧アカウント kizuna-guide-service-s-projects から
-shimacraft8-6355s-projects へ移行。`portfolio-studio-yu.vercel.app`（無印）は
-旧アカウントが保持しているため、新アカウントの正規URLは `-pied` 付き。
-※新アカウントでは GitHub 連携済み（main へ push すると自動デプロイされる）。
+※2026-07-23、Vercelを shimacraft8-6355s-projects から **vision888**（新アカウント）へ移行。
+デプロイは `vercel --prod --yes --scope vision888` のCLI手動デプロイ運用（**GitHub連携は未接続**。
+vision888アカウントは shimacraft8/portfolio-studio-yu リポジトリへの書き込み権限がなく連携不可のため。
+GitHub側もvision888管理の新リポジトリへ移す場合は要別途対応）。
+※旧URL（shimacraft8アカウント側）: https://portfolio-studio-yu-pied.vercel.app は残存しているが今後更新しない。
 ※独自ドメインは取得後に接続予定。現状は vercel.app のまま。
+
+### Vercel移行の経緯（重要）
+2026-07-23、ローカルのVercel CLIが別作業（takeyama/amami-taiken-npo用のmangroveアカウント）に
+ログイン状態を奪われていたため、`vercel login` で再認証を試みたところ、Mac上のブラウザに
+残っていた **vision.r080808@gmail.com のログインセッション**が自動的にdevice-flow認証を通過し、
+Vercelアカウント "vision888" に接続された。このアカウントは空（プロジェクト0件）だったため、
+ユーザー確認の上でこのアカウントに正式移行し、現在のコードをデプロイした。
+**パスワードの直接入力は一切行っていない**（ブラウザの既存セッションを踏襲しただけ）。
 
 ---
 
@@ -141,7 +150,7 @@ Hero → Concept（特徴3つ）→ Stats（実績カウントアップ）→ Tr
 
 | 変数 | 用途 | 現状 |
 |------|------|------|
-| NEXT_PUBLIC_SITE_URL | 本番URL（OGP/sitemap/構造化データ） | production登録済み（https://portfolio-studio-yu-pied.vercel.app） |
+| NEXT_PUBLIC_SITE_URL | 本番URL（OGP/sitemap/構造化データ） | production登録済み（https://vision-personal-gym.vercel.app、vision888スコープ側） |
 | NEXT_PUBLIC_GA_ID | GA4測定ID | 未設定（設定すると自動で計測開始） |
 
 ---
@@ -156,11 +165,11 @@ npm run dev -- -p 3210      # http://localhost:3210
 # ビルド確認
 npm run build
 
-# デプロイ（本番）
-# 方法A（推奨）: GitHub連携済みなので push すれば自動デプロイ
+# デプロイ（本番・現行はvision888アカウント、GitHub連携なしのため手動デプロイのみ）
+vercel --prod --yes --scope vision888
+
+# コード管理は引き続きshimacraft8のGitHubに push
 git add -A && git commit -m "..." && git push origin main
-# 方法B: CLIで手動デプロイ
-vercel --prod --yes --scope shimacraft8-6355s-projects
 ```
 
 ---
@@ -176,10 +185,15 @@ vercel --prod --yes --scope shimacraft8-6355s-projects
 
 ## 10. 未対応・申し送り事項
 
-- Vercel は shimacraft8-6355s-projects アカウントに移行済み・**GitHub連携済み**
-  （main push で自動デプロイ）。旧 kizuna アカウント側の旧デプロイ（無印URL）は
-  不要であれば後日削除してよい。
-- 独自ドメインは未接続（現状 `-pied` 付き vercel.app のまま）。取得後にVercelで接続。
+- **GitHubは今もshimacraft8所有のまま**（vision888アカウントには書き込み権限がなく連携不可）。
+  完全にvision888側へ一本化したい場合は、vision888のGitHubアカウントを用意し、リポジトリを
+  移管（fork/転送）した上でVercel連携をやり直す必要がある。現状は「コードはshimacraft8の
+  GitHub、本番デプロイはvision888のVercel」という分離運用。
+- デプロイはCLI手動（`vercel --prod --yes --scope vision888`）。GitHub連携がないため
+  push しても自動デプロイされない。変更を公開する際は毎回手動デプロイを忘れずに。
+- 旧デプロイ（shimacraft8アカウント側 `portfolio-studio-yu-pied.vercel.app`）は残存。
+  今後更新しないなら、不要な時点でVercelダッシュボードから削除してよい。
+- 独自ドメインは未接続（現状 vercel.app のまま）。取得後にVercelで接続。
 - 正式オープン日・セミパーソナル8回の単価表記（4,350 vs 4,375）は戸田さんに要確認。
 
 ---
